@@ -1,8 +1,19 @@
 # Website Tra cứu Thông tin Du lịch Việt Nam
+- **Môn học:** QUẢN TRỊ DỰ ÁN CÔNG NGHỆ THÔNG TIN
+- **Tên dự án:** WEBSITE TRA CỨU THÔNG TIN DU LỊCH TRONG NƯỚC
+- **Thời gian thực hiện:** 6 Weeks
 
-Website tra cứu thông tin các địa điểm du lịch trong nước.
+## 2. Thành viên nhóm
 
-## Cài đặt
+| STT | Họ và tên | MSSV |
+|----|-----------|------|
+| 1 | Huỳnh Lương Chí Dũng | 23050130 |
+| 2 | Nguyễn Thành Đồng | 23050158 |
+| 3 | Trương Duy Thành Đạt | 23050165 |
+| 4 | Nguyễn Thái Anh | 23050180 |
+
+---
+## Hướng dẫn cài đặt
 
 1. Cài đặt dependencies:
 ```bash
@@ -26,14 +37,10 @@ Chạy frontend (Vite dev server) và backend riêng biệt:
 ```bash
 npm run dev
 ```
-Frontend sẽ chạy tại http://localhost:5173
-
 **Terminal 2 - Backend:**
 ```bash
 npm run server:dev
 ```
-Backend API sẽ chạy tại http://localhost:3000
-
 ### Production Mode
 
 Sau khi build frontend, chạy server:
@@ -61,3 +68,5 @@ npm start
 - Xem lịch trình gợi ý
 - Xem và thêm đánh giá
 - Đăng ký/Đăng nhập (đang phát triển)
+
+## Version: v1.1.0
