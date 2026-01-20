@@ -1,31 +1,13 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tra cứu Du lịch Việt Nam</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Tra cứu thông tin du lịch trong nước</h1>
-    <div class="search-filter">
-      <input type="text" id="search" placeholder="Tìm kiếm địa điểm...">
-      <select id="province">
-        <option value="">Tỉnh/Thành</option>
-      </select>
-      <select id="type">
-        <option value="">Loại hình du lịch</option>
-        <option value="biển">Biển</option>
-        <option value="núi">Núi</option>
-        <option value="di tích">Di tích</option>
-        <option value="văn hóa">Văn hóa</option>
-      </select>
-      <button onclick="fetchDestinations()">Tìm kiếm</button>
-    </div>
-    <div id="destinations"></div>
-    <div id="details" style="display:none;"></div>
-  </div>
-  <script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tra cứu thông tin du lịch Việt Nam</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/main.jsx"></script>
+  </body>
 </html>
