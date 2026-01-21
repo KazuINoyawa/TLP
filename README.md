@@ -69,4 +69,4 @@ npm start
 - Xem và thêm đánh giá
 - Đăng ký/Đăng nhập (đang phát triển)
 
-## Version: v1.1.0
+## Version: v1.1.1
