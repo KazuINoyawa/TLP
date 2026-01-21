@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import AuthModal from './AuthModal';
 import { motion } from 'framer-motion';
 
 const Header = () => {
@@ -8,15 +9,19 @@ const Header = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  // Giả lập kiểm tra đăng nhập (sau này thay bằng context thực tế)
+  const isLoggedIn = Boolean(localStorage.getItem('token'));
+  const [authModal, setAuthModal] = useState({ open: false, mode: 'login' });
+
   return (
     <header className="header">
       <div className="header-container">
         <Link to="/" className="logo">
           <span className="logo-icon">✈️</span>
-          <span className="logo-text">Vietnam Travel</span>
+          <span className="logo-text">ViTr</span>
         </Link>
         
-        <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
+        <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}> 
           <Link 
             to="/" 
             className={`nav-link ${isActive('/') ? 'active' : ''}`}
@@ -31,27 +36,33 @@ const Header = () => {
           >
             Địa điểm
           </Link>
-          <Link 
-            to="/packages" 
-            className={`nav-link ${isActive('/packages') ? 'active' : ''}`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Gói du lịch
-          </Link>
-          <Link 
-            to="/login" 
-            className={`nav-link ${isActive('/login') ? 'active' : ''}`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Đăng nhập
-          </Link>
-          <Link 
-            to="/register" 
-            className={`nav-link nav-link-button ${isActive('/register') ? 'active' : ''}`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Đăng ký
-          </Link>
+          {isLoggedIn && (
+            <Link 
+              to="/my-bookings" 
+              className={`nav-link ${isActive('/my-bookings') ? 'active' : ''}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Gói đã đặt
+            </Link>
+          )}
+          {!isLoggedIn && (
+            <>
+              <span
+                className={`nav-link ${isActive('/login') ? 'active' : ''}`}
+                style={{ cursor: 'pointer' }}
+                onClick={() => { setIsMenuOpen(false); setAuthModal({ open: true, mode: 'login' }); }}
+              >
+                Đăng nhập
+              </span>
+              <span
+                className={`nav-link nav-link-button ${isActive('/register') ? 'active' : ''}`}
+                style={{ cursor: 'pointer' }}
+                onClick={() => { setIsMenuOpen(false); setAuthModal({ open: true, mode: 'register' }); }}
+              >
+                Đăng ký
+              </span>
+            </>
+          )}
         </nav>
 
         <button 
@@ -64,6 +75,15 @@ const Header = () => {
           <span></span>
         </button>
       </div>
+      <AuthModal
+        open={authModal.open}
+        mode={authModal.mode}
+        onClose={(nextMode) => {
+          if (nextMode === 'register') setAuthModal({ open: true, mode: 'register' });
+          else if (nextMode === 'login') setAuthModal({ open: true, mode: 'login' });
+          else setAuthModal({ open: false, mode: 'login' });
+        }}
+      />
     </header>
   );
 };

@@ -8,12 +8,33 @@ const formatVnd = (value) => {
   }
 };
 
+
+import { useNavigate } from 'react-router-dom';
+
 const TravelPackageCard = ({ pkg }) => {
   const [imgIdx, setImgIdx] = useState(0);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+  const [showBookModal, setShowBookModal] = useState(false);
   const images = pkg.images?.length ? pkg.images : [];
+  const navigate = useNavigate();
+
+  // Giả lập kiểm tra đăng nhập (sau này thay bằng context thực tế)
+  const isLoggedIn = Boolean(localStorage.getItem('token'));
 
   const nextImg = () => setImgIdx((prev) => (prev + 1) % images.length);
   const prevImg = () => setImgIdx((prev) => (prev - 1 + images.length) % images.length);
+
+  const handleBook = () => {
+    if (!isLoggedIn) {
+      setShowLoginPrompt(true);
+      return;
+    }
+    setShowBookModal(true);
+  };
+
+  const handleDetail = () => {
+    navigate(`/travel-packages/${pkg.id}`);
+  };
 
   return (
     <article className="pkg-card">
@@ -68,13 +89,35 @@ const TravelPackageCard = ({ pkg }) => {
         </div>
 
         <div className="pkg-actions">
-          <button className="btn btn-primary" type="button">
+          <button className="btn btn-primary" type="button" onClick={handleBook}>
             Đặt gói
           </button>
-          <button className="btn btn-secondary" type="button">
+          <button className="btn btn-secondary" type="button" onClick={handleDetail}>
             Chi tiết
           </button>
         </div>
+
+        {showLoginPrompt && (
+          <div className="pkg-modal-overlay" onClick={() => setShowLoginPrompt(false)}>
+            <div className="pkg-modal" onClick={e => e.stopPropagation()}>
+              <h4>Yêu cầu đăng nhập</h4>
+              <p>Bạn cần đăng nhập để sử dụng chức năng này.</p>
+              <button className="btn btn-primary" onClick={() => { setShowLoginPrompt(false); navigate('/login'); }}>Đăng nhập</button>
+              <button className="btn btn-secondary" onClick={() => setShowLoginPrompt(false)}>Đóng</button>
+            </div>
+          </div>
+        )}
+
+        {showBookModal && (
+          <div className="pkg-modal-overlay" onClick={() => setShowBookModal(false)}>
+            <div className="pkg-modal" onClick={e => e.stopPropagation()}>
+              <h4>Xác nhận đặt gói</h4>
+              <p>Bạn muốn đặt gói <b>{pkg.name}</b>?</p>
+              <button className="btn btn-primary" onClick={() => { setShowBookModal(false); /* TODO: Gọi API đặt gói */ }}>Xác nhận</button>
+              <button className="btn btn-secondary" onClick={() => setShowBookModal(false)}>Hủy</button>
+            </div>
+          </div>
+        )}
       </div>
     </article>
   );

@@ -26,6 +26,17 @@ exports.getAll = async (req, res) => {
     if (province) filter.province = province;
     if (type) filter.type = type;
     if (q) filter.name = { $regex: q, $options: 'i' };
+
+    // Nếu không có cả province và type => chỉ trả về các địa điểm không ẩn
+    if (!province && !type) {
+      filter.isHidden = false;
+    }
+    // Nếu có province và type (tìm kiếm đúng), thì trả về cả ẩn và không ẩn
+    // Nếu chỉ có 1 trong 2, vẫn chỉ trả về không ẩn
+    else if (!(province && type)) {
+      filter.isHidden = false;
+    }
+
     const destinations = await Destination.find(filter);
     res.json(destinations);
   } catch (err) {

@@ -144,6 +144,7 @@ const TravelPackages = () => {
     return filteredDestinations.flatMap((d) => buildPackagesForDestination(d));
   }, [filteredDestinations]);
 
+  const isLoggedIn = Boolean(localStorage.getItem('token'));
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -192,6 +193,12 @@ const TravelPackages = () => {
         {error && (
           <div className="error-message" style={{ marginTop: 16 }}>
             {error}
+          </div>
+        )}
+
+        {!isLoggedIn && (
+          <div className="error-message" style={{ margin: '24px 0', fontWeight: 500 }}>
+            Bạn cần đăng nhập để đặt gói du lịch hoặc xem chi tiết các gói.
           </div>
         )}
 

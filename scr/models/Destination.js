@@ -16,6 +16,7 @@ const destinationSchema = new mongoose.Schema({
   bestTime: { type: String }, // Gợi ý thời điểm du lịch phù hợp
   rating: { type: Number, default: 0 }, // Điểm đánh giá trung bình
   reviewCount: { type: Number, default: 0 }, // Số lượng đánh giá
+  isHidden: { type: Boolean, default: false }, // Ẩn khỏi danh sách, chỉ hiện khi tìm kiếm đúng
 }, { timestamps: true });
 
 module.exports = mongoose.model("Destination", destinationSchema);

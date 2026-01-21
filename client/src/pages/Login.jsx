@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const Login = () => {
+const Login = ({ isModal, onClose }) => {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -32,7 +32,11 @@ const Login = () => {
           localStorage.setItem('token', data.token);
           localStorage.setItem('username', data.username);
         }
-        navigate('/destinations');
+        if (isModal && onClose) {
+          onClose();
+        } else {
+          navigate('/destinations');
+        }
       } else {
         setError(data.error || 'Đăng nhập thất bại');
       }
@@ -52,12 +56,12 @@ const Login = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: isModal ? 0 : 40 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -40 }}
+      exit={{ opacity: 0, y: isModal ? 0 : -40 }}
       transition={{ duration: 0.5 }}
-      className="page auth-page"
-      style={{ paddingTop: '80px', paddingBottom: '40px' }}
+      className={isModal ? 'auth-modal-content' : 'page auth-page'}
+      style={isModal ? {} : { paddingTop: '80px', paddingBottom: '40px' }}
     >
       <div className="auth-container">
         <div className="auth-card">
@@ -102,7 +106,12 @@ const Login = () => {
 
           <div className="auth-footer">
             <p>
-              Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
+              Chưa có tài khoản?{' '}
+              {isModal ? (
+                <span className="auth-link" onClick={() => onClose && onClose('register')}>Đăng ký ngay</span>
+              ) : (
+                <Link to="/register">Đăng ký ngay</Link>
+              )}
             </p>
           </div>
         </div>
