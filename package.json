@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "server": "node scr/server.js",
     "server:dev": "nodemon scr/server.js",
-    "start": "node scr/server.js"
+    "start": "node scr/server.js",
+    "seed:destinations": "node scr/docs/seed-destinations.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

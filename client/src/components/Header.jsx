@@ -32,6 +32,13 @@ const Header = () => {
             Địa điểm
           </Link>
           <Link 
+            to="/packages" 
+            className={`nav-link ${isActive('/packages') ? 'active' : ''}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Gói du lịch
+          </Link>
+          <Link 
             to="/login" 
             className={`nav-link ${isActive('/login') ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}

@@ -6,6 +6,7 @@ import DestinationList from '../pages/DestinationList';
 import DestinationDetail from '../pages/DestinationDetail';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import TravelPackages from '../pages/TravelPackages';
 
 const AppRouter = () => {
   const location = useLocation();
@@ -16,6 +17,7 @@ const AppRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/destinations" element={<DestinationList />} />
         <Route path="/destination/:id" element={<DestinationDetail />} />
+        <Route path="/packages" element={<TravelPackages />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

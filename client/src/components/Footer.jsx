@@ -21,6 +21,7 @@ const Footer = () => {
           <ul className="footer-links">
             <li><Link to="/">Trang chủ</Link></li>
             <li><Link to="/destinations">Địa điểm du lịch</Link></li>
+            <li><Link to="/packages">Gói du lịch</Link></li>
             <li><Link to="/login">Đăng nhập</Link></li>
             <li><Link to="/register">Đăng ký</Link></li>
           </ul>

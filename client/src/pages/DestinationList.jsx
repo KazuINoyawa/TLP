@@ -5,12 +5,25 @@ import FilterPanel from '../components/FilterPanel';
 import DestinationCard from '../components/DestinationCard';
 import { fetchDestinations } from '../api/api';
 
+const PROVINCES = [
+  'An Giang', 'Bà Rịa - Vũng Tàu', 'Bạc Liêu', 'Bắc Giang', 'Bắc Kạn', 'Bắc Ninh',
+  'Bến Tre', 'Bình Dương', 'Bình Định', 'Bình Phước', 'Bình Thuận', 'Cà Mau',
+  'Cao Bằng', 'Cần Thơ', 'Đà Nẵng', 'Đắk Lắk', 'Đắk Nông', 'Điện Biên', 'Đồng Nai',
+  'Đồng Tháp', 'Gia Lai', 'Hà Giang', 'Hà Nam', 'Hà Nội', 'Hà Tĩnh', 'Hải Dương',
+  'Hải Phòng', 'Hậu Giang', 'Hòa Bình', 'Hưng Yên', 'Khánh Hòa', 'Kiên Giang',
+  'Kon Tum', 'Lai Châu', 'Lâm Đồng', 'Lạng Sơn', 'Lào Cai', 'Long An', 'Nam Định',
+  'Nghệ An', 'Ninh Bình', 'Ninh Thuận', 'Phú Thọ', 'Phú Yên', 'Quảng Bình', 'Quảng Nam',
+  'Quảng Ngãi', 'Quảng Ninh', 'Quảng Trị', 'Sóc Trăng', 'Sơn La', 'Tây Ninh', 'Thái Bình',
+  'Thái Nguyên', 'Thanh Hóa', 'Thừa Thiên Huế', 'Tiền Giang', 'TP Hồ Chí Minh',
+  'Trà Vinh', 'Tuyên Quang', 'Vĩnh Long', 'Vĩnh Phúc', 'Yên Bái'
+];
+
 const DestinationList = () => {
   const [destinations, setDestinations] = useState([]);
   const [search, setSearch] = useState('');
   const [province, setProvince] = useState('');
   const [type, setType] = useState('');
-  const [provinces, setProvinces] = useState([]);
+  const [provinces, setProvinces] = useState(PROVINCES);
   const [loading, setLoading] = useState(false);
 
   const loadDestinations = async () => {
@@ -22,7 +35,8 @@ const DestinationList = () => {
       if (type) params.type = type;
       const data = await fetchDestinations(params);
       setDestinations(Array.isArray(data) ? data : []);
-      setProvinces([...new Set((Array.isArray(data) ? data : []).map(d => d.province).filter(Boolean))]);
+      const derived = [...new Set((Array.isArray(data) ? data : []).map(d => d.province).filter(Boolean))];
+      setProvinces(Array.from(new Set([...PROVINCES, ...derived])));
     } catch (error) {
       console.error('Error loading destinations:', error);
       setDestinations([]);
