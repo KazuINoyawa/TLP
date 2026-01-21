@@ -78,10 +78,11 @@ const DestinationDetail = () => {
         <Link to="/destinations" className="back-link">← Quay lại danh sách</Link>
         
         <div className="destination-header">
-          <img 
-            className="details-img" 
-            src={destination.images?.[0] || 'https://via.placeholder.com/800x400'} 
-            alt={destination.name} 
+          <img
+            className="details-img"
+            src={destination.images?.[0] || 'https://via.placeholder.com/800x400'}
+            alt={destination.name}
+            style={{ maxWidth: '100%', borderRadius: 8 }}
           />
           <div className="destination-header-content">
             <h1 className="details-title">{destination.name}</h1>

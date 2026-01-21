@@ -1,3 +1,20 @@
+const { saveImage } = require('../services/Uploads/uploadDestinationImage');
+// Upload ảnh đại diện cho địa điểm du lịch
+exports.uploadImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+    const imageUrl = saveImage(req.file, id);
+    // Cập nhật trường images[0] cho địa điểm
+    const destination = await Destination.findById(id);
+    if (!destination) return res.status(404).json({ error: 'Not found' });
+    destination.images = [imageUrl, ...(destination.images?.slice(1) || [])];
+    await destination.save();
+    res.json({ imageUrl });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 const Destination = require('../models/Destination');
 

@@ -10,7 +10,7 @@ const data = [
     address: 'TP Hạ Long, Quảng Ninh',
     description: 'Kỳ quan thiên nhiên thế giới với hàng nghìn hòn đảo đá vôi hùng vĩ.',
     images: [
-      'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80',
+      'E:\Tourism\scr\Uploads\VinhHaLong.jpg',
       'https://images.unsplash.com/photo-1488482496710-9cd552a21f53?auto=format&fit=crop&w=1200&q=80',
     ],
     ticketPrice: '290.000đ - 550.000đ/khách (tùy tuyến)',
